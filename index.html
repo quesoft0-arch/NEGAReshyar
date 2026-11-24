@@ -1,0 +1,965 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="نگارش‌یار هوشمند؛ تبدیل صحبت و توضیحات ساده به نامه رسمی، عریضه و قرارداد در افغانستان.">
+<title>نگارش‌یار هوشمند | ساخت اسناد رسمی</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+:root {
+ --bg:#0b1220;
+ --panel:#141f30;
+ --panel2:#1b2940;
+ --border:#293950;
+ --text:#edf3fb;
+ --muted:#9aabc0;
+ --primary:#38bdf8;
+ --primary2:#0284c7;
+ --green:#22c55e;
+ --red:#ef4444;
+}
+
+* {box-sizing:border-box}
+
+body {
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:'Vazirmatn',Tahoma,sans-serif;
+ line-height:1.9;
+}
+
+button,input,select,textarea {font:inherit}
+
+button {cursor:pointer}
+
+header {
+ padding:20px 15px;
+ background:linear-gradient(135deg,#142b48,#101827);
+ border-bottom:1px solid var(--border);
+}
+
+.header-inner {
+ max-width:1050px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+}
+
+.brand {
+ display:flex;
+ align-items:center;
+ gap:12px;
+}
+
+.logo {
+ width:48px;
+ height:48px;
+ border-radius:14px;
+ display:grid;
+ place-items:center;
+ background:linear-gradient(135deg,#38bdf8,#2563eb);
+ color:white;
+ font-size:25px;
+ font-weight:bold;
+}
+
+.brand h1 {
+ margin:0;
+ font-size:20px;
+}
+
+.brand small {color:var(--muted)}
+
+.header-tag {
+ font-size:12px;
+ color:#7dd3fc;
+ border:1px solid #245879;
+ padding:5px 10px;
+ border-radius:30px;
+}
+
+.container {
+ max-width:1050px;
+ margin:25px auto;
+ padding:0 15px;
+}
+
+.intro {
+ text-align:center;
+ margin:35px 0 25px;
+}
+
+.intro h2 {
+ font-size:27px;
+ margin:0 0 8px;
+}
+
+.intro p {
+ color:var(--muted);
+ margin:0;
+ font-size:14px;
+}
+
+.card {
+ background:var(--panel);
+ border:1px solid var(--border);
+ border-radius:17px;
+ padding:20px;
+ margin-bottom:20px;
+ box-shadow:0 10px 30px #00000020;
+}
+
+.card h3 {
+ margin:0 0 18px;
+ font-size:18px;
+}
+
+.ad-box {
+ min-height:85px;
+ border:1px dashed #496078;
+ background:#101c2d;
+ border-radius:12px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ color:var(--muted);
+ font-size:12px;
+ margin-bottom:20px;
+ padding:12px;
+}
+
+.ad-box strong {color:#7dd3fc}
+
+.ad-box ins {display:block;width:100%}
+
+.form-grid {
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:15px;
+}
+
+.field {
+ display:flex;
+ flex-direction:column;
+ gap:6px;
+}
+
+.field.full {grid-column:1/-1}
+
+label {
+ font-size:13px;
+ font-weight:600;
+ color:#cbd8e8;
+}
+
+input,select,textarea {
+ width:100%;
+ background:#0d1727;
+ border:1px solid var(--border);
+ border-radius:10px;
+ color:var(--text);
+ padding:12px;
+ outline:none;
+}
+
+input:focus,select:focus,textarea:focus {
+ border-color:var(--primary);
+ box-shadow:0 0 0 3px #38bdf820;
+}
+
+textarea {
+ min-height:155px;
+ resize:vertical;
+}
+
+textarea::placeholder,input::placeholder {
+ color:#70849c;
+}
+
+.help {
+ color:var(--muted);
+ font-size:11px;
+}
+
+.voice-row {
+ display:flex;
+ gap:10px;
+ align-items:center;
+ flex-wrap:wrap;
+ margin-top:10px;
+}
+
+.btn {
+ border:0;
+ border-radius:10px;
+ padding:11px 17px;
+ font-weight:600;
+ transition:.2s;
+}
+
+.btn:hover {filter:brightness(1.12)}
+
+.primary {
+ background:linear-gradient(135deg,#0ea5e9,#2563eb);
+ color:white;
+}
+
+.secondary {
+ background:#26374d;
+ color:#e2eaf5;
+ border:1px solid #40536c;
+}
+
+.success {
+ background:#166534;
+ color:white;
+}
+
+.danger {
+ background:#7f1d1d;
+ color:white;
+}
+
+.voice-status {
+ font-size:12px;
+ color:#7dd3fc;
+}
+
+.actions {
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-top:18px;
+}
+
+.actions button {flex:1;min-width:125px}
+
+.result-card {margin-top:25px}
+
+.result-top {
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:10px;
+ flex-wrap:wrap;
+ margin-bottom:15px;
+}
+
+.result-top h3 {margin:0}
+
+.paper {
+ background:#fff;
+ color:#111;
+ border:1px solid #d0d0d0;
+ width:100%;
+ max-width:794px;
+ min-height:1123px;
+ margin:0 auto;
+ padding:55px 55px 45px;
+ border-radius:4px;
+ box-shadow:0 5px 25px #0005;
+ font-family:Tahoma,'Vazirmatn',sans-serif;
+ font-size:14px;
+ line-height:2.2;
+ overflow-wrap:anywhere;
+}
+
+.paper * {color:#111}
+
+.bismillah {
+ text-align:center;
+ font-weight:bold;
+ font-size:19px;
+ margin-bottom:30px;
+}
+
+.paper-title {
+ text-align:center;
+ font-weight:bold;
+ font-size:18px;
+ margin:20px 0;
+}
+
+.paper-meta {
+ display:flex;
+ justify-content:space-between;
+ flex-wrap:wrap;
+ gap:8px;
+ margin-bottom:20px;
+ font-size:12px;
+}
+
+.paper p {
+ text-align:justify;
+ margin:12px 0;
+ white-space:pre-wrap;
+}
+
+.paper .subject {font-weight:bold}
+
+.signature-grid {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:20px;
+ margin-top:65px;
+ text-align:center;
+}
+
+.signature-grid div {
+ min-height:90px;
+ border-top:1px solid #555;
+ padding-top:10px;
+}
+
+.witnesses {
+ margin-top:25px;
+ border-top:1px dashed #777;
+ padding-top:12px;
+}
+
+.contract-table {
+ width:100%;
+ border-collapse:collapse;
+ margin:15px 0;
+}
+
+.contract-table td {
+ border:1px solid #777;
+ padding:8px;
+}
+
+footer {
+ text-align:center;
+ color:var(--muted);
+ font-size:12px;
+ padding:20px 10px 35px;
+}
+
+.notice {
+ color:#fbbf24;
+ font-size:12px;
+ margin-top:12px;
+}
+
+.hidden {display:none!important}
+
+@media(max-width:600px) {
+ .header-inner {align-items:flex-start}
+ .brand h1 {font-size:17px}
+ .header-tag {font-size:10px}
+ .intro h2 {font-size:22px}
+ .card {padding:15px}
+ .form-grid {grid-template-columns:1fr}
+ .field.full {grid-column:auto}
+ .paper {
+  padding:28px 20px;
+  min-height:900px;
+  font-size:12px;
+ }
+ .bismillah {font-size:16px}
+ .paper-title {font-size:15px}
+ .actions button {min-width:100%}
+}
+
+@media print {
+ @page {
+  size:A4;
+  margin:15mm;
+ }
+
+ body {
+  background:white!important;
+  margin:0!important;
+ }
+
+ body * {
+  visibility:hidden!important;
+ }
+
+ #paper,#paper * {
+  visibility:visible!important;
+ }
+
+ #paper {
+  position:absolute;
+  top:0;
+  right:0;
+  width:100%;
+  max-width:none;
+  min-height:0;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  color:#000!important;
+  background:#fff!important;
+  font-size:12pt;
+  overflow:visible;
+ }
+
+ #paper * {
+  color:#000!important;
+ }
+
+ .signature-grid,.witnesses {
+  break-inside:avoid;
+ }
+
+ .contract-table {
+  break-inside:avoid;
+ }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="header-inner">
+  <div class="brand">
+   <div class="logo">ن</div>
+   <div>
+    <h1>نگارش‌یار هوشمند</h1>
+    <small>دستیار تهیه اسناد رسمی افغانستان</small>
+   </div>
+  </div>
+  <div class="header-tag">نسخه ۱.۰</div>
+ </div>
+</header>
+
+<main class="container">
+
+ <section class="intro">
+  <h2>صحبت کن، سند رسمی دریافت کن!</h2>
+  <p>توضیحات ساده خود را بنویس یا صحبت کن؛ نگارش‌یار آن را به سندی منظم و رسمی تبدیل می‌کند.</p>
+ </section>
+
+ <!-- جایگاه تبلیغات شماره ۱: کد تبلیغاتی بنری خود را اینجا قرار دهید -->
+ <div class="ad-box" id="ad-top">
+  <strong>جایگاه تبلیغات</strong>
+  <span>محل نمایش بنر تبلیغاتی اول</span>
+  <!-- کد تبلیغاتی شرکت موردنظر را اینجا قرار دهید -->
+ </div>
+
+ <section class="card">
+  <h3>📝 اطلاعات و مشخصات سند</h3>
+
+  <div class="form-grid">
+
+   <div class="field full">
+    <label for="docType">نوع سند</label>
+    <select id="docType">
+     <option value="petition">عریضه اداری رسمی</option>
+     <option value="contract">قرارداد کرایه‌نشینی خانه یا دکان</option>
+     <option value="request">درخواست همکاری، مرخصی یا شکایت‌نامه</option>
+     <option value="free">تبدیل متن آزاد به نامه رسمی</option>
+    </select>
+   </div>
+
+   <div class="field">
+    <label for="personName">نام متقاضی / طرف اول</label>
+    <input id="personName" placeholder="ن??م و تخلص">
+   </div>
+
+   <div class="field">
+    <label for="fatherName">نام پدر (ولد)</label>
+    <input id="fatherName" placeholder="نام پدر">
+   </div>
+
+   <div class="field">
+    <label for="recipient">نام اداره یا طرف مقابل</label>
+    <input id="recipient" placeholder="مثلاً ریاست محترم ...">
+   </div>
+
+   <div class="field">
+    <label for="date">تاریخ سند</label>
+    <input id="date" type="text" readonly>
+   </div>
+
+   <div class="field full" id="contractFields" style="display:none">
+    <label for="rentAmount">مبلغ کرایه (افغانی)</label>
+    <input id="rentAmount" type="number" min="0" placeholder="مثلاً 5000">
+
+    <label for="contractDuration">مدت قرارداد</label>
+    <input id="contractDuration" placeholder="مثلاً یک سال">
+
+    <label for="tenant">نام کرایه‌گیرنده</label>
+    <input id="tenant" placeholder="نام و تخلص کرایه‌گیرنده">
+
+    <label for="property">مشخصات ملکیت</label>
+    <input id="property" placeholder="آدرس و مشخصات خانه یا دکان">
+   </div>
+
+   <div class="field full">
+    <label for="description">توضیحات و درخواست شما</label>
+    <textarea id="description" placeholder="به زبان ساده بنویسید چه می‌خواهید، چه اتفاقی افتاده و هدف شما چیست..."></textarea>
+
+    <div class="voice-row">
+     <button class="btn success" type="button" id="voiceBtn">🎙 شروع صحبت</button>
+     <button class="btn secondary" type="button" id="stopVoice">⏹ توقف ضبط</button>
+     <span class="voice-status" id="voiceStatus">آماده دریافت صدا</span>
+    </div>
+
+    <span class="help">برای تایپ صوتی، اجازه دسترسی به میکروفون را به مرورگر بدهید. زبان تشخیص گفتار فارسی است.</span>
+   </div>
+
+  </div>
+
+  <div class="actions">
+   <button class="btn primary" id="generateBtn" type="button">✨ ساخت سند رسمی</button>
+   <button class="btn secondary" id="clearBtn" type="button">پاک‌سازی فرم</button>
+  </div>
+
+  <div class="notice">
+   توجه: اطلاعات را با دقت وارد کنید. نگارش‌یار جایگزین مشاوره حقوقی یا تأیید رسمی اسناد نیست.
+  </div>
+ </section>
+
+ <section class="card result-card hidden" id="resultSection">
+  <div class="result-top">
+   <h3>📄 پیش‌نمایش سند نهایی</h3>
+   <span class="help">قالب رسمی کاغذ A4</span>
+  </div>
+
+  <article class="paper" id="paper">
+   <div class="bismillah">بسمه تعالی</div>
+   <div id="documentContent"></div>
+  </article>
+
+  <div class="actions">
+   <button class="btn primary" type="button" id="copyBtn">📋 کپی متن نهایی</button>
+   <button class="btn success" type="button" id="printBtn">🖨 چاپ / ذخیره PDF</button>
+  </div>
+  <div class="help" id="copyStatus" role="status" aria-live="polite"></div>
+ </section>
+
+ <!-- جایگاه تبلیغات شماره ۲: کد تبلیغاتی بنری خود را اینجا قرار دهید -->
+ <div class="ad-box" id="ad-bottom">
+  <strong>جایگاه تبلیغات</strong>
+  <span>محل نمایش بنر تبلیغاتی دوم</span>
+  <!-- کد تبلیغاتی شرکت موردنظر را اینجا قرار دهید -->
+ </div>
+
+</main>
+
+<footer>
+ نگارش‌یار هوشمند | ساخته‌شده برای تسهیل امور اداری مردم افغانستان
+ <br>
+ © 2026 - تمامی حقوق محفوظ است.
+</footer>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+
+const faDate = new Intl.DateTimeFormat("fa-AF", {
+ year:"numeric",
+ month:"long",
+ day:"numeric"
+});
+
+function updateDate() {
+ $("date").value = faDate.format(new Date());
+}
+
+updateDate();
+
+$("docType").addEventListener("change", () => {
+ $("contractFields").style.display =
+  $("docType").value === "contract" ? "flex" : "none";
+ $("contractFields").style.flexDirection = "column";
+ $("contractFields").style.gap = "8px";
+});
+
+function escapeHTML(value) {
+ return String(value).replace(/[&<>"']/g, c => ({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ })[c]);
+}
+
+// تبدیل واژه‌های محاوره‌ای به واژه‌های رسمی
+function formalize(text) {
+ const replacements = [
+  [/\bمیخوام\b|می‌خوام|میخواهم/g, "تقاضا دارم"],
+  [/میخایم|می‌خواهیم/g, "خواستار می‌باشیم"],
+  [/\bپول\b/g, "مبلغ"],
+  [/\bخونه\b|خانه/g, "منزل مسکونی"],
+  [/\bدکان\b|مغازه/g, "باب دکان تجارتی"],
+  [/لطفا|لطفاً/g, "احتراماً"],
+  [/بخاطر/g, "به‌منظور"],
+  [/واسه/g, "به‌منظور"],
+  [/می‌خوام/g, "تقاضا دارم"],
+  [/میشه/g, "امکان‌پذیر می‌باشد"],
+  [/نمی‌تونم/g, "قادر نمی‌باشم"],
+  [/می‌تونم/g, "قادر می‌باشم"],
+  [/بدم/g, "ارائه نمایم"],
+  [/بدین/g, "ارائه نمایید"],
+  [/بگیرم/g, "دریافت نمایم"],
+  [/بگیرین/g, "دریافت نمایید"],
+  [/کمک کنید/g, "همکاری لازم را مبذول فرمایید"],
+  [/مشکل دارم/g, "با مشکل مواجه می‌باشم"],
+  [/خیلی/g, "بسیار"],
+  [/واسه/g, "جهت"],
+  [/رو\b/g, "را"],
+  [/تو\b/g, "در"],
+  [/یه\b/g, "یک"],
+  [/باید/g, "ضروری است"]
+ ];
+
+ let result = text.trim();
+
+ replacements.forEach(([pattern, replacement]) => {
+  result = result.replace(pattern, replacement);
+ });
+
+ return result;
+}
+
+function makeParagraphs(text) {
+ return text.split(/\n+/)
+  .map(line => line.trim())
+  .filter(Boolean)
+  .map(line => `<p>${escapeHTML(line)}</p>`)
+  .join("");
+}
+
+function generatePetition(data) {
+ const recipient = escapeHTML(data.recipient || "مقام محترم مسئول");
+ const name = escapeHTML(data.name);
+ const father = escapeHTML(data.father || "مشخص نشده");
+ const body = makeParagraphs(formalize(data.description));
+
+ return `
+ <div class="paper-meta">
+  <span>تاریخ: ${escapeHTML(data.date)}</span>
+  <span>شماره: ـــــــــــــ</span>
+ </div>
+ <div class="paper-title">عریضه رسمی</div>
+ <p class="subject">مقام محترم ${recipient}</p>
+ <p>السلام علیکم و رحمة‌الله و برکاته!</p>
+ <p>احتراماً به عرض رسانیده می‌شود که اینجانب ${name} ولد ${father}، موضوع ذیل را به حضور محترم شما تقدیم می‌نمایم:</p>
+ ${body}
+ <p>بنابراین، از مقام محترم تقاضا دارم موضوع فوق را مورد بررسی قرار داده و در زمینه اجراآت قانونی و لازم مبذول فرمایید.</p>
+ <p>با احترام</p>
+ <div class="signature-grid">
+  <div>نام متقاضی: ${name}<br>امضا / اثر انگشت:</div>
+  <div>شماره تماس: ........................<br>تاریخ: ${escapeHTML(data.date)}</div>
+ </div>`;
+}
+
+function generateRequest(data) {
+ const recipient = escapeHTML(data.recipient || "مقام محترم مسئول");
+ const body = makeParagraphs(formalize(data.description));
+
+ return `
+ <div class="paper-meta">
+  <span>تاریخ: ${escapeHTML(data.date)}</span>
+  <span>موضوع: درخواست رسمی</span>
+ </div>
+ <div class="paper-title">درخواست رسمی</div>
+ <p class="subject">به مقام محترم ${recipient}</p>
+ <p>با عرض سلام و احترام!</p>
+ <p>اینجانب ${escapeHTML(data.name)} ولد ${escapeHTML(data.father || "مشخص نشده")}، بدین‌وسیله درخواست خویش را به شرح ذیل تقدیم می‌نمایم:</p>
+ ${body}
+ <p>خواهشمند است در صورت موافقت، هدایت لازم را در زمینه صادر فرمایید. پیشاپیش از توجه و همکاری شما سپاسگزارم.</p>
+ <p>با احترام</p>
+ <div class="signature-grid">
+  <div>نام: ${escapeHTML(data.name)}<br>امضا:</div>
+  <div>تاریخ: ${escapeHTML(data.date)}<br>شماره تماس: ....................</div>
+ </div>`;
+}
+
+function generateFree(data) {
+ const body = makeParagraphs(formalize(data.description));
+
+ return `
+ <div class="paper-meta">
+  <span>تاریخ: ${escapeHTML(data.date)}</span>
+  <span>نوع: نامه رسمی</span>
+ </div>
+ <div class="paper-title">نامه رسمی</div>
+ <p class="subject">گیرنده: ${escapeHTML(data.recipient || "مقام محترم مربوطه")}</p>
+ <p>با سلام و احترام!</p>
+ ${body}
+ <p>با تشکر از توجه و همکاری شما.</p>
+ <div class="signature-grid">
+  <div>نام: ${escapeHTML(data.name)}<br>ولد: ${escapeHTML(data.father || "مشخص نشده")}<br>امضا:</div>
+  <div>تاریخ: ${escapeHTML(data.date)}<br>شماره تماس: ....................</div>
+ </div>`;
+}
+
+function generateContract(data) {
+ const amount = Number(data.amount);
+ const amountText = Number.isFinite(amount) && amount >= 0
+  ? amount.toLocaleString("en-US") + " افغانی"
+  : "........................";
+
+ const tenant = escapeHTML(data.tenant || "........................");
+ const property = escapeHTML(data.property || "........................");
+ const duration = escapeHTML(data.duration || "........................");
+ const description = formalize(data.description);
+
+ return `
+ <div class="paper-meta">
+  <span>تاریخ تنظیم: ${escapeHTML(data.date)}</span>
+  <span>محل تنظیم: افغانستان</span>
+ </div>
+ <div class="paper-title">قرارداد کرایه‌نشینی خانه / دکان</div>
+
+ <p>این قرارداد میان طرفین ذیل با رضایت و توافق کامل و در چارچوب قوانین نافذه کشور افغانستان تنظیم گردیده است:</p>
+
+ <p><b>طرف اول (مالک):</b> ${escapeHTML(data.name)} ولد ${escapeHTML(data.father || "........................")}</p>
+ <p><b>طرف دوم (کرایه‌گیرنده):</b> ${tenant}</p>
+
+ <table class="contract-table">
+  <tr><td>مشخصات ملکیت</td><td>${property}</td></tr>
+  <tr><td>مبلغ کرایه</td><td>${escapeHTML(amountText)}</td></tr>
+  <tr><td>مدت قرارداد</td><td>${duration}</td></tr>
+  <tr><td>تاریخ تنظیم</td><td>${escapeHTML(data.date)}</td></tr>
+ </table>
+
+ <p><b>شرایط و تعهدات:</b></p>
+ <p>۱. طرف اول متعهد است ملکیت فوق را مطابق توافق به طرف دوم تسلیم نماید.</p>
+ <p>۲. طرف دوم متعهد است مبلغ کرایه را مطابق زمان‌بندی توافق‌شده پرداخت نماید.</p>
+ <p>۳. طرفین مکلف به رعایت شرایط قانونی و حفظ حقوق یکدیگر می‌باشند.</p>
+ <p>۴. هرگونه تغییر در مفاد این قرارداد با توافق طرفین صورت می‌گیرد.</p>
+ <p>۵. طرفین تأیید می‌نمایند که مفاد قرارداد را مطالعه نموده و با رضایت کامل آن را امضا می‌کنند.</p>
+
+ <p><b>توضیحات و شرایط اضافی:</b></p>
+ ${makeParagraphs(escapeHTML(description))}
+
+ <div class="signature-grid">
+  <div>طرف اول (مالک)<br>نام: ${escapeHTML(data.name)}<br>امضا / اثر انگشت:</div>
+  <div>طرف دوم (کرایه‌گیرنده)<br>نام: ${tenant}<br>امضا / اثر انگشت:</div>
+ </div>
+
+ <div class="witnesses">
+  <b>شاهد اول:</b> نام: ........................ امضا: ........................
+  <br><br>
+  <b>شاهد دوم:</b> نام: ........................ امضا: ........................
+  <br><br>
+  <b>تذکر:</b> این نمونه قرارداد ابتدایی است و برای معاملات مهم باید توسط مرجع حقوقی صلاحیت‌دار بررسی و تکمیل گردد.
+ </div>`;
+}
+
+function generateDocument() {
+ const data = {
+  name:$("personName").value.trim(),
+  father:$("fatherName").value.trim(),
+  recipient:$("recipient").value.trim(),
+  date:$("date").value,
+  description:$("description").value.trim(),
+  amount:$("rentAmount").value,
+  duration:$("contractDuration").value.trim(),
+  tenant:$("tenant").value.trim(),
+  property:$("property").value.trim()
+ };
+
+ if (!data.name || !data.description) {
+  alert("لطفاً نام متقاضی و توضیحات را وارد کنید.");
+  return;
+ }
+
+ if ($("docType").value === "contract" &&
+     (!data.tenant || !data.property || !data.duration)) {
+  alert("لطفاً مشخصات کرایه‌گیرنده، ملکیت و مدت قرارداد را تکمیل کنید.");
+  return;
+ }
+
+ let html = "";
+
+ switch ($("docType").value) {
+  case "petition":
+   html = generatePetition(data);
+   break;
+  case "contract":
+   html = generateContract(data);
+   break;
+  case "request":
+   html = generateRequest(data);
+   break;
+  default:
+   html = generateFree(data);
+ }
+
+ $("documentContent").innerHTML = html;
+ $("resultSection").classList.remove("hidden");
+
+ $("resultSection").scrollIntoView({
+  behavior:"smooth",
+  block:"start"
+ });
+}
+
+$("generateBtn").addEventListener("click", generateDocument);
+
+$("clearBtn").addEventListener("click", () => {
+ if (!confirm("آیا از پاک کردن تمام اطلاعات اطمینان دارید؟")) return;
+
+ document.querySelectorAll("input:not([readonly]),textarea").forEach(el => {
+  el.value = "";
+ });
+
+ $("docType").value = "petition";
+ $("contractFields").style.display = "none";
+ $("resultSection").classList.add("hidden");
+ updateDate();
+ $("voiceStatus").textContent = "آماده دریافت صدا";
+});
+
+function getFinalText() {
+ return $("paper").innerText.trim();
+}
+
+$("copyBtn").addEventListener("click", async () => {
+ const text = getFinalText();
+
+ try {
+  await navigator.clipboard.writeText(text);
+  $("copyStatus").textContent = "✓ متن سند با موفقیت کپی شد.";
+ } catch (error) {
+  const area = document.createElement("textarea");
+  area.value = text;
+  document.body.appendChild(area);
+  area.select();
+
+  try {
+   document.execCommand("copy");
+   $("copyStatus").textContent = "✓ متن سند کپی شد.";
+  } catch (e) {
+   $("copyStatus").textContent = "کپی خودکار انجام نشد؛ متن را انتخاب و کپی کنید.";
+  }
+
+  area.remove();
+ }
+});
+
+$("printBtn").addEventListener("click", () => {
+ window.print();
+});
+
+
+// تایپ صوتی فارسی - نسخه اصلاح شده
+const SpeechRecognition =
+ window.SpeechRecognition || window.webkitSpeechRecognition;
+
+let recognition = null;
+let listening = false;
+
+if (SpeechRecognition) {
+ recognition = new SpeechRecognition();
+ recognition.lang = "fa-IR";
+ recognition.continuous = true;
+ recognition.interimResults = true;
+ recognition.maxAlternatives = 1;
+
+ recognition.onstart = () => {
+  listening = true;
+  $("voiceStatus").textContent = "🎙 در حال شنیدن صحبت شما...";
+  $("voiceBtn").textContent = "🎙 ضبط فعال است";
+ };
+
+ recognition.onresult = event => {
+  let finalText = "";
+  let interimText = "";
+
+  for (let i = event.resultIndex; i < event.results.length; i++) {
+   const transcript = event.results[i][0].transcript;
+   if (event.results[i].isFinal) {
+    finalText += transcript + " ";
+   } else {
+    interimText += transcript;
+   }
+  }
+
+  if (finalText.trim()) {
+   const current = $("description").value.trim();
+   $("description").value =
+    (current ? current + "\n" : "") + finalText.trim();
+  }
+
+  if (interimText) {
+   $("voiceStatus").textContent = "در حال تشخیص: " + interimText;
+  }
+ };
+
+ recognition.onerror = event => {
+  listening = false;
+  const errors = {
+   "not-allowed": "اجازه میکروفون داده نشده است.",
+   "service-not-allowed": "سرویس تشخیص گفتار اجازه اجرا ندارد.",
+   "no-speech": "صدایی تشخیص داده نشد. دوباره صحبت کنید.",
+   "network": "خطای اینترنت؛ اتصال خود را بررسی کنید.",
+   "audio-capture": "میکروفون در دسترس نیست.",
+   "language-not-supported": "زبان فارسی پشتیبانی نمی‌شود.",
+   "aborted": "ضبط متوقف شد."
+  };
+
+  $("voiceStatus").textContent =
+   "خطا: " + (errors[event.error] || event.error);
+  $("voiceBtn").textContent = "🎙 شروع صحبت";
+ };
+
+ recognition.onend = () => {
+  listening = false;
+  $("voiceBtn").textContent = "🎙 شروع صحبت";
+
+  if ($("voiceStatus").textContent.includes("در حال")) {
+   $("voiceStatus").textContent = "ضبط پایان یافت.";
+  }
+ };
+
+} else {
+ $("voiceBtn").disabled = true;
+ $("voiceBtn").textContent = "مرورگر پشتیبانی نمی‌کند";
+ $("voiceStatus").textContent =
+  "لطفاً از نسخه به‌روز Google Chrome استفاده کنید.";
+}
+
+$("voiceBtn").addEventListener("click", () => {
+ if (!recognition) return;
+
+ if (listening) return;
+
+ if (!window.isSecureContext &&
+     location.protocol !== "file:") {
+  $("voiceStatus").textContent =
+   "برای تایپ صوتی باید سایت با HTTPS باز شود.";
+  return;
+ }
+
+ try {
+  $("voiceStatus").textContent = "در حال راه‌اندازی میکروفون...";
+  recognition.start();
+ } catch (error) {
+  $("voiceStatus").textContent =
+   "خطای " + error.name + ": " + error.message;
+ }
+});
+
+$("stopVoice").addEventListener("click", () => {
+ if (recognition && listening) {
+  recognition.stop();
+ }
+});
+
+</script>
+</body>
+</html>
+
